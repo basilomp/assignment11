@@ -1,4 +1,4 @@
-package configs;
+package app.configs;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import services.UserService;
+import app.services.UserService;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -24,7 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/auth_page/**").authenticated()
                 .antMatchers("/user_info").authenticated()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPERADMIN") // ROLE_ADMIN, ROLE_SUPERADMIN
+                .antMatchers("/admin/**").hasAuthority("CAN_READ_ADMIN_CONSOLE") // ROLE_ADMIN, ROLE_SUPERADMIN
+//                .antMatchers("/admin/**").hasAnyRoleAnyRole("ADMIN", "SUPERADMIN") // ROLE_ADMIN, ROLE_SUPERADMIN
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
