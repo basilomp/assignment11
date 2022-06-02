@@ -1,11 +1,11 @@
-package configs.controllers;
+package app.controllers;
 
 
-import entities.User;
+import app.entities.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import services.UserService;
+import app.services.UserService;
 
 import java.security.Principal;
 
